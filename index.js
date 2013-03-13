@@ -1,9 +1,9 @@
-var Steez = require("steez"),
-    clarinet = require("clarinet"),
+var clarinet = require("clarinet"),
+    stream = require("stream"),
     util = require("util");
 
 var JSuck = module.exports = function JSuck() {
-  Steez.call(this);
+  stream.Transform.call(this, {objectMode: true});
 
   this.clarinet = clarinet.createStream();
 
@@ -50,7 +50,7 @@ var JSuck = module.exports = function JSuck() {
     this.states.pop();
 
     if (this.list.length === 0) {
-      this.emit("data", o);
+      this.push(o);
     }
   }.bind(this));
 
@@ -73,14 +73,16 @@ var JSuck = module.exports = function JSuck() {
     this.states.pop();
 
     if (this.list.length === 0) {
-      this.emit("data", o);
+      this.push(o);
     }
   }.bind(this));
 };
-util.inherits(JSuck, Steez);
+util.inherits(JSuck, stream.Transform);
 
-JSuck.prototype.write = function write(data) {
-  this.clarinet.write(data);
-
-  return !this.paused && this.writable;
+JSuck.prototype._transform = function _transform(input, encoding, done) {
+  if (this.clarinet.write(input)) {
+    return done();
+  } else {
+    this.clarinet.once("drain", done);
+  }
 };
