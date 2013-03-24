@@ -2,8 +2,10 @@ var clarinet = require("clarinet"),
     stream = require("stream"),
     util = require("util");
 
-var JSuck = module.exports = function JSuck() {
-  stream.Transform.call(this, {objectMode: true});
+var JSuck = module.exports = function JSuck(options) {
+  options = options || {};
+
+  stream.Transform.call(this, {objectMode: true, highWaterMark: options.highWaterMark || 1});
 
   this.clarinet = clarinet.createStream();
 
