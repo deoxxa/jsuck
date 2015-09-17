@@ -1,6 +1,6 @@
 {
   "name": "jsuck",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Streaming (optionally) newline/whitespace delimited JSON parser",
   "main": "index.js",
   "repository": {
