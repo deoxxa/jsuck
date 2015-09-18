@@ -1,6 +1,6 @@
 {
   "name": "jsuck",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Streaming (optionally) newline/whitespace delimited JSON parser",
   "main": "index.js",
   "repository": {
@@ -18,9 +18,9 @@
   "author": "Conrad Pankoff <deoxxa@fknsrs.biz> (http://www.fknsrs.biz/)",
   "license": "BSD",
   "engines": {
-    "node": "~0.9.12 || ~0.10.0"
+    "node": "~0.9.12 || ~0.10.0 || ~0.12.0"
   },
   "dependencies": {
-    "clarinet": "~0.7.0"
+    "clarinet": "~0.11.0"
   }
 }
